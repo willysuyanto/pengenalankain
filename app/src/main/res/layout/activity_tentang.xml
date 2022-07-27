@@ -30,12 +30,11 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:textSize="20sp"/>
-
-    <ImageView
+    "<ImageView
         android:id="@+id/image"
         android:layout_width="100dp"
         android:layout_height="0dp"
-        android:src="@drawable/Foto"
+        android:src="@drawable/foto"
         android:scaleType="fitStart"
         android:layout_marginTop="100dp"
         app:layout_constraintStart_toStartOf="parent"
