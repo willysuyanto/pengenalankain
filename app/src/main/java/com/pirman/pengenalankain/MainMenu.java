@@ -2,6 +2,7 @@ package com.pirman.pengenalankain;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -23,7 +24,24 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-        AppDatabase appDatabase = AppDatabase.getInstance(this);
+
+        //initData(this);
+
+        btnRecomend = findViewById(R.id.btn_recoment);
+        btnJenisKain = findViewById(R.id.btn_jenis_kain);
+        btnLogin = findViewById(R.id.btn_login);
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainMenu.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    void initData(Context context){
+        AppDatabase appDatabase = AppDatabase.getInstance(context);
 
         User user = new User();
         user.id = 1;
@@ -38,22 +56,9 @@ public class MainMenu extends AppCompatActivity {
         penjahit.username = "penjahit";
         penjahit.password = "password123";
         penjahit.roles = "penjahit";
+        Disposable d = appDatabase.userDao().insertUser(user).subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread()
+             ).subscribe();
+        Disposable d1 = appDatabase.userDao().insertUser(penjahit).subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread()).subscribe();
 
-        //jalan pertama kali di uncomment
-//        Disposable d = appDatabase.userDao().insertUser(user).subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread()
-//        ).subscribe();
-//        Disposable d1 = appDatabase.userDao().insertUser(penjahit).subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread()).subscribe();
-
-        btnRecomend = findViewById(R.id.btn_recoment);
-        btnJenisKain = findViewById(R.id.btn_jenis_kain);
-        btnLogin = findViewById(R.id.btn_login);
-
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainMenu.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 }
