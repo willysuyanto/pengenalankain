@@ -31,7 +31,8 @@ public class MenuAdmin extends AppCompatActivity {
         btnClient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MenuAdmin.this, ClientActivity.class);
+                startActivity(intent);
             }
         });
 

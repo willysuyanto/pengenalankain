@@ -22,7 +22,7 @@ public class MainMenu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_menu);
+        setContentView(R.layout.activitypu_main_menu);
 
 
         //initData(this);
@@ -30,6 +30,7 @@ public class MainMenu extends AppCompatActivity {
         btnRecomend = findViewById(R.id.btn_recoment);
         btnJenisKain = findViewById(R.id.btn_jenis_kain);
         btnLogin = findViewById(R.id.btn_login);
+
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
