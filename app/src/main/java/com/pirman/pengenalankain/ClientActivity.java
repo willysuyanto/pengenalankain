@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pirman.pengenalankain.database.AppDatabase;
 import com.pirman.pengenalankain.database.entities.Client;
@@ -23,8 +25,9 @@ public class ClientActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     RecyclerView.Adapter recyclerViewAdapter;
-    RecyclerView.LayoutManager recylerViewLayoutManager;
-    Button btnClientAdd;
+    RecyclerView.LayoutManager recyclerViewLayoutManager;
+
+    Button btn_add_client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,39 +35,43 @@ public class ClientActivity extends AppCompatActivity {
         setContentView(R.layout.activity_client);
 
         AppDatabase appDatabase = AppDatabase.getInstance(this);
-        btnClientAdd = findViewById(R.id.btn_add_client);
 
-        btnClientAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ClientActivity.this, TambahClient.class);
-                startActivity(intent);
-            }
+        recyclerView = findViewById(R.id.rv_client);
+        btn_add_client = findViewById(R.id.btn_add_client);
+
+        btn_add_client.setOnClickListener(v->{
+            Intent intent = new Intent(ClientActivity.this, TambahClient.class);
+            startActivity(intent);
         });
 
-
-        Disposable d = appDatabase.clientDao().getAllClient().subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread()).subscribe(clients -> {
-//            recyclerView = findViewById(R.id.rv_client);
-//            recylerViewLayoutManager = new LinearLayoutManager(this);
-//            recyclerView.setLayoutManager(recylerViewLayoutManager);
-//            recyclerViewAdapter = new ClientAdapter(this, clients);
-//            recyclerView.setAdapter(recyclerViewAdapter);
-            for (Client client : clients){
-                Log.d("DATACLIENT", client.nama);
-            }
-        }, throwable -> {});
+        Disposable d1 = appDatabase.clientDao().getAllClient().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(clients -> {
+              for(Client client: clients){
+                  Log.d( "onCreate: ", client.nama);
+              }
+            recyclerViewLayoutManager = new LinearLayoutManager(this);
+            recyclerView.setLayoutManager(recyclerViewLayoutManager);
+            recyclerViewAdapter = new ClientAdapter(this, clients);
+            recyclerView.setAdapter(recyclerViewAdapter);
+        }, throwable -> {
+            Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+        });
     }
 
-    void initData(Context context){
-        AppDatabase appDatabase = AppDatabase.getInstance(context);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AppDatabase appDatabase = AppDatabase.getInstance(getApplicationContext());
 
-        Client client = new Client();
-
-        client.nama = "Client Asih";
-        client.nohp = "083218123456";
-        Disposable d = appDatabase.clientDao().insertClient(client).subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread()
-                ).subscribe();
-
-
+        Disposable d1 = appDatabase.clientDao().getAllClient().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(clients -> {
+            for(Client client: clients){
+                Log.d( "onCreate: ", client.nama);
+            }
+            recyclerViewLayoutManager = new LinearLayoutManager(this);
+            recyclerView.setLayoutManager(recyclerViewLayoutManager);
+            recyclerViewAdapter = new ClientAdapter(this, clients);
+            recyclerView.setAdapter(recyclerViewAdapter);
+        }, throwable -> {
+            Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+        });
     }
 }

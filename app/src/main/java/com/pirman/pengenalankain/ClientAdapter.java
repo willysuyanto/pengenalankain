@@ -18,29 +18,28 @@ public class ClientAdapter extends
     private static final String TAG = ClientAdapter.class.getSimpleName();
 
     private Context context;
-    private List<ClientAdapter> list;
+    private List<Client> list;
     private ClientAdapterCallback mAdapterCallback;
 
-    public ClientAdapter(Context context, List<ClientAdapter> list, ClientAdapterCallback adapterCallback) {
+    public ClientAdapter(Context context, List<Client> list) {
         this.context = context;
         this.list = list;
-        this.mAdapterCallback = adapterCallback;
-    }
-
-    public ClientAdapter(ClientActivity clientActivity, List<Client> clients) {
 
     }
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_client,
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_client,
                 parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        ClientAdapter item = list.get(position);
+        Client item = list.get(position);
+        holder.nama.setText(item.nama);
+        holder.nohp.setText(item.nohp);
     }
 
     @Override

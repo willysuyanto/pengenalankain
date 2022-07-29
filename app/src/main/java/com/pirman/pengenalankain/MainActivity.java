@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "Username/Password Salah", Toast.LENGTH_SHORT).show();
                         }
                     },throwable -> {
-                        Toast.makeText(MainActivity.this, "Username/Password Salah", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
                     });
                 }
             }
