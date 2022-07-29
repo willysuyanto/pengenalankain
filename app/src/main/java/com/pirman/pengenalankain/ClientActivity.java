@@ -4,13 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.pirman.pengenalankain.database.AppDatabase;
 import com.pirman.pengenalankain.database.entities.Client;
+import com.pirman.pengenalankain.database.entities.User;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -39,12 +42,29 @@ public class ClientActivity extends AppCompatActivity {
             }
         });
 
-//        Disposable d = appDatabase.clientDao().getAllClient().subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread()).subscribe(clients -> {
+
+        Disposable d = appDatabase.clientDao().getAllClient().subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread()).subscribe(clients -> {
 //            recyclerView = findViewById(R.id.rv_client);
 //            recylerViewLayoutManager = new LinearLayoutManager(this);
 //            recyclerView.setLayoutManager(recylerViewLayoutManager);
 //            recyclerViewAdapter = new ClientAdapter(this, clients);
 //            recyclerView.setAdapter(recyclerViewAdapter);
-//        }, throwable -> {});
+            for (Client client : clients){
+                Log.d("DATACLIENT", client.nama);
+            }
+        }, throwable -> {});
+    }
+
+    void initData(Context context){
+        AppDatabase appDatabase = AppDatabase.getInstance(context);
+
+        Client client = new Client();
+
+        client.nama = "Client Asih";
+        client.nohp = "083218123456";
+        Disposable d = appDatabase.clientDao().insertClient(client).subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread()
+                ).subscribe();
+
+
     }
 }
