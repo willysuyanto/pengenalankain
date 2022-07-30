@@ -13,15 +13,27 @@ public class Kain {
     public String gambar;
 
     @ColumnInfo()
-    public String namakain;
+    public String namaKain;
 
     @ColumnInfo()
     public String deskripsi;
 
-    public Kain(String gambar, String namakain, String deskripsi) {
+    @ColumnInfo()
+    public double harga;
+
+    @ColumnInfo()
+    public String ketebalan;
+
+    @ColumnInfo()
+    public String tekstur;
+
+    public Kain(String gambar, String namakain, String deskripsi, double harga, String ketebalan, String tekstur) {
         this.gambar = gambar;
-        this.namakain = namakain;
+        this.namaKain = namakain;
         this.deskripsi = deskripsi;
+        this.harga = harga;
+        this.ketebalan = ketebalan;
+        this.tekstur = tekstur;
     }
 
     public Kain() {

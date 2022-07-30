@@ -39,7 +39,8 @@ public class MenuAdmin extends AppCompatActivity {
         btnKain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MenuAdmin.this, KainActivity.class);
+                startActivity(intent);
             }
         });
     }

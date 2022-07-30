@@ -25,8 +25,8 @@ public interface KainDao {
     Completable insertKain(Kain kain);
 
     @Update(onConflict = OnConflictStrategy.ABORT)
-    Completable Kain(Kain kain);
+    Completable updateKain(Kain kain);
 
     @Delete()
-    Completable Kain(Kain kain);
+    Completable deleteKain(Kain kain);
 }

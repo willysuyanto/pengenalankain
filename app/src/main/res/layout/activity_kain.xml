@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".KainActivity">
+
+    <TextView
+        android:id="@+id/head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Data Kain"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/btn_add_kain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textColor="@color/black"
+        android:text="Tambah Kain"
+        app:layout_constraintTop_toBottomOf="@id/head"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_kain"
+        app:layout_constraintTop_toBottomOf="@id/btn_add_kain"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_height="0dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
