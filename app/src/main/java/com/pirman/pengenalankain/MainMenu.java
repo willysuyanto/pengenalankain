@@ -17,7 +17,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class MainMenu extends AppCompatActivity {
 
-    Button btnRecomend, btnJenisKain, btnLogin;
+    Button btnRecomend, btnJenisKain, btnTentang, btnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +29,16 @@ public class MainMenu extends AppCompatActivity {
 
         btnRecomend = findViewById(R.id.btn_recoment);
         btnJenisKain = findViewById(R.id.btn_jenis_kain);
+        btnTentang = findViewById(R.id.btn_tentang);
         btnLogin = findViewById(R.id.btn_login);
 
+        btnTentang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainMenu.this, TentangActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
